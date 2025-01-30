@@ -70,22 +70,36 @@ function Header() {
 }
 
 function PizzaList() {
+  const pizzas = pizzaData;
   return (
     <section className="pizza-list">
-      {pizzaData.map((pizza, index) => (
-        <Pizza key={index} pizza={pizza} />
-      ))}
+      {pizzas.length > 0 ? (
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        "We're still working on our menu. Please come back later :"
+      )}
     </section>
   );
 }
 
-function Pizza({ pizza }) {
+function Pizza({ pizzaObj }) {
   return (
     <div>
-      <img src={pizza.photoName} alt={pizza.name} />
-      <h2>{pizza.name}</h2>
-      <p>{pizza.ingredients}</p>
-      <p>{pizza.soldOut ? "SOLD OUT" : <p>${pizza.price} €</p>} </p>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+      <h2>{pizzaObj.name}</h2>
+      <p>{pizzaObj.ingredients}</p>
+      <p>{pizzaObj.soldOut ? "SOLD OUT" : <p>${pizzaObj.price} €</p>} </p>
     </div>
   );
 }
